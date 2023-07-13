@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Bazzar.Api.Controllers
+namespace Bazzar.Core.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
