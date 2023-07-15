@@ -22,6 +22,7 @@ namespace Bazaar.Core.Api.Infrastructure.Provision.Brokers.Clouds
             this.tenantId = Environment.GetEnvironmentVariable("AzureTenantId");
             this.adminName = Environment.GetEnvironmentVariable("AzureAdminName");
             this.adminAccess = Environment.GetEnvironmentVariable("AzureAdminAccess");
+            this.azure = AuthenticateAzure(); 
         }
 
         private IAzure AuthenticateAzure()
