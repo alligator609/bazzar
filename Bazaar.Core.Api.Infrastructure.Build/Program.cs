@@ -1,84 +1,79 @@
 ﻿using ADotNet.Clients;
-using ADotNet.Models.Pipelines.AdoPipelines.AspNets.Tasks.DotNetExecutionTasks;
-using ADotNet.Models.Pipelines.AdoPipelines.AspNets.Tasks.UseDotNetTasks;
-using ADotNet.Models.Pipelines.AdoPipelines.AspNets;
+using ADotNet.Models.Pipelines.GithubPipelines.DotNets.Tasks.SetupDotNetTaskV1s;
+using ADotNet.Models.Pipelines.GithubPipelines.DotNets.Tasks;
+using ADotNet.Models.Pipelines.GithubPipelines.DotNets;
 
-var adoClient = new ADotNetClient();
+var aDotNetClient = new ADotNetClient();
 
-var aspNetPipeline = new AspNetPipeline
+var githubPipeline = new GithubPipeline
 {
-    TriggeringBranches = new List<string>
-      {
-          "main"
-      },
+    Name = "Github",
 
-    VirtualMachinesPool = new VirtualMachinesPool
+    OnEvents = new Events
     {
-        VirtualMachineImage = VirtualMachineImages.Windows2022
+        Push = new PushEvent
+        {
+            Branches = new string[] { "main" }
+        },
+
+        PullRequest = new PullRequestEvent
+        {
+            Branches = new string[] { "main" }
+        }
     },
 
-    ConfigurationVariables = new ConfigurationVariables
-    {
-        BuildConfiguration = BuildConfiguration.Release
-    },
-
-    Tasks = new List<BuildTask>
+    Jobs = new Dictionary<string, Job>
       {
-          new UseDotNetTask
           {
-              DisplayName = "Use DotNet 6.0",
-
-              Inputs = new UseDotNetTasksInputs
+              "build",
+              new Job
               {
-                  Version = "6.0.100",
-                  IncludePreviewVersions = true,
-                  PackageType = PackageType.sdk
+                  RunsOn = BuildMachines.Windows2022,
+
+                  Steps = new List<GithubTask>
+                  {
+                      new CheckoutTaskV2
+                      {
+                          Name = "Check out"
+                      },
+
+                      new SetupDotNetTaskV1
+                      {
+                          Name = "Setup .Net",
+
+                          TargetDotNetVersion = new TargetDotNetVersion
+                          {
+                              DotNetVersion = "6.0.100",
+                              IncludePrerelease = true
+                          }
+                      },
+
+                      new RestoreTask
+                      {
+                          Name = "Restore"
+                      },
+
+                      new DotNetBuildTask
+                      {
+                          Name = "Build"
+                      },
+
+                      new TestTask
+                      {
+                          Name = "Test"
+                      }
+                  }
               }
-          },
-
-          new DotNetExecutionTask
-          {
-              DisplayName = "Restore",
-
-              Inputs = new DotNetExecutionTasksInputs
-              {
-                  Command = Command.restore,
-                  FeedsToUse = Feeds.select
-              }
-          },
-
-          new DotNetExecutionTask
-          {
-              DisplayName = "Build",
-
-              Inputs = new DotNetExecutionTasksInputs
-              {
-                  Command = Command.build,
-              }
-          },
-
-          new DotNetExecutionTask
-          {
-              DisplayName = "Test",
-
-              Inputs = new DotNetExecutionTasksInputs
-              {
-                  Command = Command.test,
-                  Projects = "**/*Unit*.csproj"
-              }
-          },
-
-          //new DotNetExecutionTask
-          //{
-          //    DisplayName = "Publish",
-
-          //    Inputs = new DotNetExecutionTasksInputs
-          //    {
-          //        Command = Command.publish,
-          //        PublishWebProjects = true
-          //    }
-          //}
+          }
       }
 };
 
-adoClient.SerializeAndWriteToFile(aspNetPipeline, "../../../../.github/workflows/dotnet.yml");
+string buildScriptPath = "../../../../.github/workflows/dotnet.yml";
+string directoryPath = Path.GetDirectoryName(buildScriptPath);
+
+if (!Directory.Exists(directoryPath))
+{
+    Directory.CreateDirectory(directoryPath);
+}
+
+aDotNetClient.SerializeAndWriteToFile(githubPipeline, path: buildScriptPath);

@@ -1,27 +1,25 @@
-trigger:
-- main
-pool:
-  vmImage: 'windows-2022'
-variables:
-  buildConfiguration: 'Release'
-steps:
-- task: UseDotNet@2
-  displayName: 'Use DotNet 6.0'
-  inputs:
-    packageType: 'sdk'
-    version: '6.0.100'
-    includePreviewVersions: true
-- task: DotNetCoreCLI@2
-  displayName: 'Restore'
-  inputs:
-    command: 'restore'
-    feedsToUse: 'select'
-- task: DotNetCoreCLI@2
-  displayName: 'Build'
-  inputs:
-    command: 'build'
-- task: DotNetCoreCLI@2
-  displayName: 'Test'
-  inputs:
-    command: 'test'
-    projects: '**/*Unit*.csproj'
+name: Github
+on:
+  push:
+    branches:
+    - main
+  pull_request:
+    branches:
+    - main
+jobs:
+  build:
+    runs-on: windows-2022
+    steps:
+    - name: Check out
+      uses: actions/checkout@v2
+    - name: Setup .Net
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.100
+        include-prerelease: true
+    - name: Restore
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
