@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bazaar.Core.Api.Infrastructure.Provision.Brokers.Clouds
 {
-    public partial class ICloudBroker
+    public partial interface ICloudBroker
     {
     }
 }
