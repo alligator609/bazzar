@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.Management.ResourceManager.Fluent;
+﻿using Bazaar.Core.Api.Infrastructure.Provision.Models.Storages;
+using Microsoft.Azure.Management.ResourceManager.Fluent;
 using Microsoft.Azure.Management.ResourceManager.Fluent.Core;
 using Microsoft.Azure.Management.Sql.Fluent;
 using System.Threading.Tasks;
@@ -28,6 +29,14 @@ namespace Bazaar.Core.Api.Infrastructure.Provision.Brokers.Clouds
                  .Define(sqlDatabaseName)
                  .WithExistingSqlServer(sqlServerName)
                  .CreateAsync();
+        }
+        public SqlDatabaseAccess GetSqlDatabaseAccess()
+        {
+            return new SqlDatabaseAccess
+            {
+                AdminName = this.adminName,
+                AdminAccess = this.adminAccess
+            };
         }
     }
 

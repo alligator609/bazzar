@@ -1,10 +1,9 @@
-﻿using Microsoft.Azure.Management.Fluent;
+﻿using Bazaar.Core.Api.Infrastructure.Provision.Models.Storages;
+using Microsoft.Azure.Management.Fluent;
 using Microsoft.Azure.Management.ResourceManager.Fluent;
 using Microsoft.Azure.Management.ResourceManager.Fluent.Authentication;
 using Microsoft.Azure.Management.ResourceManager.Fluent.Core;
-using Microsoft.Azure.Management.Sql.Fluent;
 using System;
-using System.Threading.Tasks;
 
 namespace Bazaar.Core.Api.Infrastructure.Provision.Brokers.Clouds
 {
@@ -24,7 +23,7 @@ namespace Bazaar.Core.Api.Infrastructure.Provision.Brokers.Clouds
             this.tenantId = Environment.GetEnvironmentVariable("AzureTenantId");
             this.adminName = Environment.GetEnvironmentVariable("AzureAdminName");
             this.adminAccess = Environment.GetEnvironmentVariable("AzureAdminAccess");
-            this.azure = AuthenticateAzure(); 
+            this.azure = AuthenticateAzure();
         }
 
         private IAzure AuthenticateAzure()
