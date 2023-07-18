@@ -11,5 +11,8 @@ namespace Bazaar.Core.Api.Infrastructure.Provision.Brokers.Clouds
         ValueTask<ISqlServer> CreateSqlServerAsync(
             string sqlServerName,
             IResourceGroup resourceGroup);
+        ValueTask<ISqlDatabase> CreateSqlDatabaseAsync(
+            string sqlDatabaseName,
+            ISqlServer sqlServerName);
     }
 }

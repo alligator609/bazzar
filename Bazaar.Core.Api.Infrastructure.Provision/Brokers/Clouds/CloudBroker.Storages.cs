@@ -19,5 +19,17 @@ namespace Bazaar.Core.Api.Infrastructure.Provision.Brokers.Clouds
                 .WithAdministratorPassword(this.adminAccess)
                 .CreateAsync();
         }
+        public async ValueTask<ISqlDatabase> CreateSqlDatabaseAsync(
+            string sqlDatabaseName,
+            ISqlServer sqlServerName)
+        {
+            return await this.azure.SqlServers
+                 .Databases
+                 .Define(sqlDatabaseName)
+                 .WithExistingSqlServer(sqlServerName)
+                 .CreateAsync();
+        }
     }
+
+
 }
