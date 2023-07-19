@@ -28,6 +28,10 @@ namespace Bazaar.Core.Api.Infrastructure.Provision.Services.Processings.CloudMan
             await ProvisionAsync(
                 projectName: cloudManagementConfiguration.ProjectName,
                 cloudAction: cloudManagementConfiguration.Up);
+            
+            await DeprovisionAsync(
+             projectName: cloudManagementConfiguration.ProjectName,
+             cloudAction: cloudManagementConfiguration.Down);
         }
         private async ValueTask ProvisionAsync(
            string projectName,
@@ -68,6 +72,19 @@ namespace Bazaar.Core.Api.Infrastructure.Provision.Services.Processings.CloudMan
                         appServicePlan,
                         resourceGroup
                         );
+            }
+        }
+        private async ValueTask DeprovisionAsync(
+          string projectName,
+          CloudAction cloudAction)
+        {
+            List<string> environments = RetrieveEnvironments(cloudAction);
+
+            foreach (string environmentName in environments)
+            {
+                await this.cloudManagementService.DeprovisionResourceGroupAsync(
+                    projectName,
+                    environmentName);
             }
         }
         private static List<string> RetrieveEnvironments(CloudAction cloudAction) =>

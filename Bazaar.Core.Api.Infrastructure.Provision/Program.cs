@@ -1,3 +1,16 @@
-﻿using System;
+﻿using System.Threading.Tasks;
+using Bazaar.Core.Api.Infrastructure.Provision.Services.Processings.CloudManagements;
 
-Console.WriteLine("Hello, World!");
+namespace Bazaar.Core.Api.Infrastructure.Provision
+{
+    internal class Program
+    {
+        static async Task Main(string[] args)
+        {
+            ICloudManagementProcessingService cloudManagementProcessingService =
+               new CloudManagementProcessingService();
+
+            await cloudManagementProcessingService.ProcessAsync();
+        }
+    }
+}
