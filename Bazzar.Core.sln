@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazzar.Core.Api.Tests.Unit"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazzar.Core.Api.Tests.Acceptance", "Bazzar.Core.Api.Tests.Acceptance\Bazzar.Core.Api.Tests.Acceptance.csproj", "{2089C1BF-6FEB-408B-AF23-34F48D5DCF0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bazaar.Core.Api.Infrastructure.Build", "Bazaar.Core.Api.Infrastructure.Build\Bazaar.Core.Api.Infrastructure.Build.csproj", "{86EF83EF-F039-462E-AE27-B694BFC5FA20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bazaar.Core.Api.Infrastructure.Build", "Bazaar.Core.Api.Infrastructure.Build\Bazaar.Core.Api.Infrastructure.Build.csproj", "{86EF83EF-F039-462E-AE27-B694BFC5FA20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bazaar.Core.Api.Infrastructure.Provision", "Bazaar.Core.Api.Infrastructure.Provision\Bazaar.Core.Api.Infrastructure.Provision.csproj", "{6A1FC7F0-DFA1-4642-B3F1-F8866EA39049}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{86EF83EF-F039-462E-AE27-B694BFC5FA20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86EF83EF-F039-462E-AE27-B694BFC5FA20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86EF83EF-F039-462E-AE27-B694BFC5FA20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A1FC7F0-DFA1-4642-B3F1-F8866EA39049}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A1FC7F0-DFA1-4642-B3F1-F8866EA39049}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A1FC7F0-DFA1-4642-B3F1-F8866EA39049}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A1FC7F0-DFA1-4642-B3F1-F8866EA39049}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
