@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Bazaar.Core.Api.Infrastructure.Provision.Models.Storages;
 using Microsoft.Azure.Management.AppService.Fluent;
 using Microsoft.Azure.Management.ResourceManager.Fluent;
 using Microsoft.Azure.Management.Sql.Fluent;

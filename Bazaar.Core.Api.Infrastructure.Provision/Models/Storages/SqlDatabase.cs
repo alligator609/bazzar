@@ -1,6 +1,6 @@
 ﻿using Microsoft.Azure.Management.Sql.Fluent;
 
-namespace Bazaar.Core.Api.Infrastructure.Provision.Services.Foundations.CloudManagements
+namespace Bazaar.Core.Api.Infrastructure.Provision.Models.Storages
 {
     public class SqlDatabase
     {
