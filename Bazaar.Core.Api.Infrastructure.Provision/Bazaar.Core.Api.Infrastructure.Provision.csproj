@@ -8,16 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Brokers\Clouds\CloudBroker.ResourceGroups.cs" />
-    <Compile Remove="Brokers\Clouds\ICloudBroker.ResourceGroups.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Brokers\Clouds\CloudBroker.ResourceGroups.cs" />
-    <None Include="Brokers\Clouds\ICloudBroker.ResourceGroups.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Management.Fluent" Version="1.38.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
